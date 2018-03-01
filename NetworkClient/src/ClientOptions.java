@@ -25,7 +25,7 @@ public class ClientOptions {
 		
 		
 	     
-		int menuSelect;
+		int menuSelect, times;
 	     
 		while(true)
 		{
@@ -61,6 +61,13 @@ public class ClientOptions {
 			        sc.next();
 			}
 			menuSelect = sc.nextInt();
+	        
+			System.out.println("How many times would you like to execute this command?");
+            times = sc.nextInt();
+
+         
+        for(int i=0; i<times; i++){ 
+			
 			switch(menuSelect)
 			{
 				case 1:

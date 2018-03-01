@@ -14,7 +14,7 @@ public class ServerOptions {
 		
 		String menuSelection;
 		int portNum = 2063; // Preset port number
-		int timeout = 15000;
+		int timeout = 60000;
 		BufferedReader input;
 		;
 
