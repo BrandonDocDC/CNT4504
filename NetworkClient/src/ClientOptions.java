@@ -20,7 +20,8 @@ public class ClientOptions {
 			
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		Socket socket = null;
-		
+		FileWriter fw = new FileWriter("output.txt");
+		BufferedWriter bw = new BufferedWriter(fw);
 		
 		
 		
@@ -115,16 +116,22 @@ public class ClientOptions {
 	       		String answer;
 	   			while((answer = input.readLine()) != null && !answer.equals("ServerDone"))
 	   			{
+	   				bw.write(answer);
+	   				bw.newLine();
 	   				System.out.println(answer);
+	   				
 	   			}
 	                
 	         	double endTime;
 	         	double totalTime;
 	         	endTime = System.currentTimeMillis();
 	         	totalTime = endTime - startTime;
+	         	bw.write((int) totalTime);
+	         	bw.newLine();
 	         	System.out.printf("Total time spent: %.3f\n ", totalTime);
 	      	}
-		}
-		
+        }
 	}
+}	
 }
+	
