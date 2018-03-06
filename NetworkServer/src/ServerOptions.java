@@ -36,7 +36,8 @@ public class ServerOptions {
 
 				input = new BufferedReader(new InputStreamReader(inputFromClient));
 				menuSelection = input.readLine();
-				selection(menuSelection);
+				System.out.println(menuSelection);
+				selection(menuSelection.trim());
 
 				// Close streams
 				outputToClient.close();
