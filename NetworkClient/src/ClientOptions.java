@@ -2,9 +2,9 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 public class ClientOptions extends Thread {
-	private String hostName;
-	private int port;
-	private int menuSelected;
+	public String hostName;
+	public int port;
+	public int menuSelected;
 	public ClientOptions(String host, int portNumber, int menuItem) {
 		hostName = host;
 		port = portNumber;
@@ -20,20 +20,72 @@ public class ClientOptions extends Thread {
 		try {
 			clientSocket = new Socket(hostName, port);
 			clientSocket.setSoTimeout(timeOut);
-			
+			String Request = "Request " + menuSelected;
+			System.out.println(Request);
 			// Output from server
-			DataOutputStream outputServer = new DataOutputStream(clientSocket.getOutputStream());
+			BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			
+			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+			boolean validInput = false;
 			timeStart = System.currentTimeMillis();
-			outputServer.writeChars("Request " +  menuSelected);
 			
-			// Read input from server
-			BufferedReader inputFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			System.out.println(inputFromServer);
-			
+			switch(menuSelected)
+			{
+				case 1:
+					System.out.println("Date Request from Client");
+					out.println("Request 1");
+					validInput =true;
+					break;
+		    	case 2:
+		    		System.out.println("Uptime Request from Client");
+					out.println("Request 2");
+			   		validInput =true;
+			   		break;
+		    	case 3:
+			   		System.out.println("Memory Use Request from Client");
+			   		out.println("Request 3");
+			   		validInput =true;
+			   		break;
+		    	case 4:
+			   		System.out.println("IPV4 Socket Connections Request from Client");
+			   		out.println("Request 4");
+			   		validInput =true;
+			   		break;
+		    	case 5:
+			   		System.out.println("Current Users Request from Client");
+			   		out.println("Request 5");
+			   		validInput =true;
+			   		break;
+		    	case 6:
+			   		System.out.println("Current OS Version Request from Client");
+			   		out.println("Request 6");
+			   		validInput =true;
+			   		break;
+		    	case 7:
+			   		System.out.println("Quit");
+			   		out.println("Request 7");
+			   		System.exit(5);
+			   		break;
+		    	default:
+			   		System.out.println("Invalid Input");
+			   		validInput =false;
+			   		break;
+			}//end switch
+			if (validInput)
+	    	{
+       			String answer;
+   				while((answer = input.readLine()) != null && !answer.equals("ServerDone"))
+   				{
+   					//bw.write(answer);
+   					//bw.newLine();
+   					System.out.println(answer);
+   				
+   				}// end while answer loop
+	    	}
 			timeEnd = System.currentTimeMillis();
 			clientSocket.close();
 			System.out.println("Response time = " + (timeEnd - timeStart));
-			outputServer.close();
+			out.close();
 		}// end try
 		catch (Exception e) {
 			System.out.println("Can not open socket at " + hostName + ":" + port);

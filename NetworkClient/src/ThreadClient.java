@@ -1,11 +1,12 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ThreadClient {
-	private static String hostName;
-	private static int portNumber;
-	private static int menuSelected;
+	static String hostName;
+	static int portNumber;
+	static int menuSelected;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// check the args to ensure the correct number of args are given
 		if(args.length < 2) {
 			System.out.println("Please enter arguments in this format <server IP Address> <port number>\n");
@@ -29,7 +30,7 @@ public class ThreadClient {
 		runThreads(numberOfTimes);
 	}// end main method 
 	
-	private static void menu() {
+	public static void menu() {
 		System.out.println("\n*** MENU ***: ");
         
 		System.out.println("\n1. Host current Date and Time\n" + 
@@ -46,9 +47,11 @@ public class ThreadClient {
 			System.out.println("User invalid input, input number between 1 or 7");
 		        sc.next();
 		}// end while !sc.hasNextInt loop
+		menuSelected = sc.nextInt();
+		
 	}// end menu method
 	
-	private static void runThreads(int times) {
+	public static void runThreads(int times) {
 		Thread[] theThreads = new Thread[times];
 		System.out.println("Concurrent Client # " + times);
 		for(int index = 0; index < theThreads.length; index++) {
