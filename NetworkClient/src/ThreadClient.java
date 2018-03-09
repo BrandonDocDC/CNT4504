@@ -21,13 +21,16 @@ public class ThreadClient {
 			System.out.println("User invalid input, please enter a port number as an Integer.");
 			System.exit(-1);
 		}// end catch (NumberFormatException)
-		
+		while(true) {
 		menu();
 		System.out.println("How many times would you like to run this action:");
 		Scanner keyboard = new Scanner(System.in);
 		int numberOfTimes = keyboard.nextInt();
-		
-		runThreads(numberOfTimes);
+		Thread[] theThreads = new Thread[numberOfTimes];
+		for(int index = 0; index < numberOfTimes; index++)
+			theThreads[index] = new ClientOptions(hostName, portNumber, menuSelected);
+		runThreads(numberOfTimes, theThreads);
+		}
 	}// end main method 
 	
 	public static void menu() {
@@ -51,12 +54,11 @@ public class ThreadClient {
 		
 	}// end menu method
 	
-	public static void runThreads(int times) {
-		Thread[] theThreads = new Thread[times];
+	
+	public static void runThreads(int times, Thread[] theThreads) {
 		System.out.println("Concurrent Client # " + times);
 		for(int index = 0; index < theThreads.length; index++) {
 			System.out.println("Thread # " + (index + 1));
-			theThreads[index] = new ClientOptions(hostName, portNumber, menuSelected);
 			theThreads[index].run();
 		}// end runThreads method
 	}// end runThreads method
