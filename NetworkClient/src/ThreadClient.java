@@ -6,7 +6,7 @@ public class ThreadClient {
 	static int portNumber;
 	static int menuSelected;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// check the args to ensure the correct number of args are given
 		if(args.length < 2) {
 			System.out.println("Please enter arguments in this format <server IP Address> <port number>\n");
@@ -30,6 +30,8 @@ public class ThreadClient {
 		for(int index = 0; index < numberOfTimes; index++)
 			theThreads[index] = new ClientOptions(hostName, portNumber, menuSelected);
 		runThreads(numberOfTimes, theThreads);
+		for(int index = 0; index < numberOfTimes; index++) 
+			theThreads[index].join();
 		}
 	}// end main method 
 	
