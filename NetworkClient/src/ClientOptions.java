@@ -18,16 +18,15 @@ public class ClientOptions extends Thread {
 		int timeOut = 15000;
 		
 		try {
+			timeStart = System.currentTimeMillis();
 			clientSocket = new Socket(hostName, port);
 			clientSocket.setSoTimeout(timeOut);
-			String Request = "Request " + menuSelected;
-			System.out.println(Request);
 			// Output from server
 			BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			
 			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			boolean validInput = false;
-			timeStart = System.currentTimeMillis();
+			
 			
 			switch(menuSelected)
 			{

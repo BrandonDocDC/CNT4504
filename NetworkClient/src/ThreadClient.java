@@ -57,8 +57,11 @@ public class ThreadClient {
 	
 	public static void runThreads(int times, Thread[] theThreads) {
 		System.out.println("Concurrent Client # " + times);
+		for(int index1 = 0; index1 < theThreads.length; index1++) {
+			theThreads[index1] = new ClientOptions(hostName, portNumber, menuSelected);
+		}
 		for(int index = 0; index < theThreads.length; index++) {
-			theThreads[index] = new ClientOptions(hostName, portNumber, menuSelected);
+			
 			System.out.println("Thread # " + (index + 1));
 			theThreads[index].run();
 		}// end runThreads method
