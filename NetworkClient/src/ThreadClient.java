@@ -27,8 +27,6 @@ public class ThreadClient {
 		Scanner keyboard = new Scanner(System.in);
 		int numberOfTimes = keyboard.nextInt();
 		Thread[] theThreads = new Thread[numberOfTimes];
-		for(int index = 0; index < numberOfTimes; index++)
-			theThreads[index] = new ClientOptions(hostName, portNumber, menuSelected);
 		runThreads(numberOfTimes, theThreads);
 		for(int index = 0; index < numberOfTimes; index++) 
 			theThreads[index].join();
@@ -60,6 +58,7 @@ public class ThreadClient {
 	public static void runThreads(int times, Thread[] theThreads) {
 		System.out.println("Concurrent Client # " + times);
 		for(int index = 0; index < theThreads.length; index++) {
+			theThreads[index] = new ClientOptions(hostName, portNumber, menuSelected);
 			System.out.println("Thread # " + (index + 1));
 			theThreads[index].run();
 		}// end runThreads method
