@@ -28,8 +28,9 @@ public class ServerOptions {
 				System.out.print("Waiting for connection");
 				clientConnection = server.accept();
 				clientConnection.setSoTimeout(timeout); // Timeout = 15 seconds
-				
-				System.out.println("Connection received from " + clientConnection.getInetAddress() + ":"
+				ServerThread client = new ServerThread(clientConnection);
+				client.run();
+				/*System.out.println("Connection received from " + clientConnection.getInetAddress() + ":"
 						+ clientConnection.getPort());
 				inputFromClient = new DataInputStream(clientConnection.getInputStream());
 				outputToClient = new DataOutputStream(clientConnection.getOutputStream());
@@ -45,9 +46,10 @@ public class ServerOptions {
 				server.close();
 				clientConnection.close();
 				if(menuSelection.equals("Request 7")){
-					System.exit(0);
+					System.exit(0);*/
+				server.close();
 				}
-			}
+			
 		} catch (Exception e) {
 			System.out.println("Can't open socket.");
 			e.printStackTrace();
@@ -56,7 +58,7 @@ public class ServerOptions {
 		
 	}
 
-	public static void selection(String menuSelect) {
+	/*public static void selection(String menuSelect) {
 		Process process;
 		String output;
 		BufferedReader br;
@@ -116,5 +118,5 @@ public class ServerOptions {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-	}
+	}*/
 }
